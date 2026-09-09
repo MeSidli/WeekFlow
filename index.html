@@ -1733,7 +1733,6 @@ html[data-theme="dark"] .current-time-dot { box-shadow:0 0 0 3px rgba(90,133,151
     event.style.zIndex = 5 + layout.column;
 
     event.innerHTML = `
-      <div class="cat">${escapeHtml(a.category)}</div>
       <div class="name">${escapeHtml(a.name)}</div>
       <div class="time">${displayTime(a.startTime)} – ${displayTime(a.endTime)}</div>
       <div class="time-popover">${displayTime(a.startTime)} – ${displayTime(a.endTime)}</div>
