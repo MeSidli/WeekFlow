@@ -2353,5 +2353,22 @@ html[data-theme="dark"] .current-time-dot { box-shadow:0 0 0 3px rgba(90,133,151
 })();
 </script>
 
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDTNDJ7zyOvMpvDpVBkvujdjjx_W2aAjrg",
+    authDomain: "weekflow-bb36b.firebaseapp.com",
+    projectId: "weekflow-bb36b",
+    storageBucket: "weekflow-bb36b.firebasestorage.app",
+    messagingSenderId: "102257549219",
+    appId: "1:102257549219:web:ed0c5b47da0c6d7146c416"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const messaging = firebase.messaging();
+</script>
+  
 </body>
 </html>
