@@ -2377,6 +2377,55 @@ html[data-theme="dark"] .current-time-dot { box-shadow:0 0 0 3px rgba(90,133,151
   firebase.initializeApp(firebaseConfig);
   const messaging = firebase.messaging();
 </script>
+
+<script>
+  const WEEKFLOW_VAPID_KEY = "BHH_DYutMDpM0DZSOPc000dcw3Ttmy6TTYpS0bI1F6PZZxQEgDDn938qD59D4cMGU7X3TG5uv0TbLjDOyP4ZDOU";
+
+  async function enableWeekflowNotifications() {
+    try {
+      if (!("Notification" in window)) {
+        alert("This browser does not support notifications.");
+        return;
+      }
+
+      const permission = await Notification.requestPermission();
+
+      if (permission !== "granted") {
+        alert("Notification permission was not granted.");
+        return;
+      }
+
+      const registration = await navigator.serviceWorker.register(
+        "/WeekFlow/firebase-messaging-sw.js"
+      );
+
+      const messaging = firebase.messaging();
+
+      const token = await messaging.getToken({
+        vapidKey: WEEKFLOW_VAPID_KEY,
+        serviceWorkerRegistration: registration
+      });
+
+      if (!token) {
+        alert("Could not register this device for notifications.");
+        return;
+      }
+
+      console.log("Weekflow FCM token:", token);
+
+      localStorage.setItem("weekflow_fcm_token", token);
+
+      alert("✅ Notifications are enabled!");
+    } catch (error) {
+      console.error("Notification setup failed:", error);
+      alert("Could not enable notifications. Check the browser console.");
+    }
+  }
+
+  document
+    .getElementById("enableNotificationsBtn")
+    .addEventListener("click", enableWeekflowNotifications);
+</script>
   
 </body>
 </html>
